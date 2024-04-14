@@ -1,9 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import MoviePopup from "./ViewDetailsPopup";
+import axios from "axios";
 
 const Movie = ({ movie }) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [trailer, setTrailer] = useState(null);
+  const [artists, setArtists] = useState([]);
+
+  const handleViewDetails = async (movie) => {
+    setSelectedMovie(movie);
+    setIsPopupOpen(true);
+
+    const API_KEY = import.meta.env.VITE_API_KEY;
+    const BASE_URL = "https://api.themoviedb.org/3";
+    // Fetch trailer
+    try {
+      const response = await axios.get(`${BASE_URL}/movie/${movie.id}/videos`, {
+        params: {
+          api_key: API_KEY,
+        },
+      });
+      setTrailer(response.data.results[0]?.key);
+    } catch (error) {
+      console.error("Error fetching trailer: ", error);
+    }
+
+    // Fetch artists
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/movie/${movie.id}/credits`,
+        {
+          params: {
+            api_key: API_KEY,
+          },
+        }
+      );
+      console.log(response, "artist");
+      setArtists(response.data.cast.slice(0, 5)); // Get the first 5 artists
+    } catch (error) {
+      console.error("Error fetching artists: ", error);
+    }
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <>
-      {console.log(movie, "movies in moview componet")}
       <div className="bg-white p-4 rounded shadow-md">
         <img
           src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
@@ -20,10 +65,21 @@ const Movie = ({ movie }) => {
           Release Date: {movie?.release_date}
         </p>
 
-        <button className="bg-blue-500 text-white px-4 py-2 rounded mt-2">
+        <button
+          onClick={() => handleViewDetails(movie)}
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+        >
           View Details
         </button>
       </div>
+
+      <MoviePopup
+        selectedMovie={selectedMovie}
+        trailer={trailer}
+        artists={artists}
+        isPopupOpen={isPopupOpen}
+        handleClosePopup={handleClosePopup}
+      />
     </>
   );
 };

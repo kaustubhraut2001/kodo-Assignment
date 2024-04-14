@@ -1,0 +1,72 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+const ViewDetailsPopup = ({
+  selectedMovie,
+  trailer,
+  artists,
+  isPopupOpen,
+  handleClosePopup,
+}) => {
+  const navigate = useNavigate();
+  const handlewtachtrailer = () => {
+    navigate(`/watch/${trailer}`);
+  };
+
+  return (
+    <>
+      {isPopupOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-75">
+          <div className="bg-white p-4 rounded shadow-md w-1/2 flex">
+            <div className="w-1/2 relative">
+              <img
+                src={`https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`}
+                alt={selectedMovie?.title}
+                className="rounded-md"
+              />
+              <button onClick={handlewtachtrailer}>Watch Trailer</button>
+            </div>
+            <div className="w-1/2 pl-4">
+              <h2 className="text-xl font-bold mb-2">{selectedMovie?.title}</h2>
+              <p className="text-gray-700 mb-2">{selectedMovie?.overview}</p>
+              <p className="text-gray-700 mb-2">
+                Rating: {selectedMovie?.vote_average}
+              </p>
+              <p className="text-gray-700 mb-2">
+                Votes: {selectedMovie?.vote_count}
+              </p>
+              <p className="text-gray-700 mb-2">
+                Popularity: {selectedMovie?.popularity}
+              </p>
+              <p className="text-gray-700 mb-2">
+                Release Date: {selectedMovie?.release_date}
+              </p>
+
+              <h3 className="text-lg font-bold mb-2">Artists:</h3>
+              <ul className="flex space-x-2">
+                {artists.map((artist) => (
+                  <li key={artist.id}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${artist.profile_path}`}
+                      alt={artist.name}
+                      className="w-10 h-10 rounded-full"
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                onClick={handleClosePopup}
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default ViewDetailsPopup;
