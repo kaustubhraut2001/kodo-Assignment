@@ -35,33 +35,7 @@ const ViewDetailsPopup = ({
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-75">
           <div className="bg-white p-4 rounded shadow-md w-3/4 h-3/4 overflow-y-auto">
             <div className="w-1/2 relative h-full float-left">
-              {/* {trailer ? (
-                <>
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${trailer}`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <img
-                      src={`https://img.youtube.com/vi/${trailer}/0.jpg`}
-                      alt="Trailer thumbnail"
-                      className="rounded-md cursor-pointer"
-                      onClick={() => {
-                        const trailerElement = document.querySelector("iframe");
-                        trailerElement.contentWindow.postMessage(
-                          '{"event":"command","func":"playVideo","args":""}',
-                          "*"
-                        );
-                      }}
-                    />
-                  </div>
-                </>
-              ) : ( */}
+
               <img
                 src={`https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`}
                 alt={selectedMovie?.title}

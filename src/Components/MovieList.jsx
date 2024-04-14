@@ -10,26 +10,24 @@ const MovieList = () => {
   const loadMoreMovies = async () => {
     try {
       const newMovies = await fetchMovies(page + 1);
-      console.log(newMovies, "new movies");
+    //   console.log(newMovies, "new movies");
       if (newMovies.length > 0) {
-        toast({
+        toast.success("Movies loaded successfully", {
           position: "top",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined,
+
           theme: "light",
         });
       }
       setMovies((prevMovies) => [...prevMovies, ...newMovies]);
       setPage((prevPage) => prevPage + 1);
     } catch (error) {
-      console.error("Error  ", error.message);
-      toast({
-        type: "error",
-        message: "Error fetching data",
+    //   console.error("Error  ", error.message);
+      toast.error("Error fetching data", {
         position: "top",
         isClosable: true,
         duration: 3000,

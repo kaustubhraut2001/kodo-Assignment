@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MoviePopup from "./ViewDetailsPopup";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Movie = ({ movie }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -23,7 +24,14 @@ const Movie = ({ movie }) => {
       });
       setTrailer(response.data.results[0]?.key);
     } catch (error) {
-      console.error("Error fetching trailer: ", error);
+		toast.error("Error fetching trailer", {
+			position: "top",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+		  });
     }
 
     // Fetch artists
@@ -39,7 +47,15 @@ const Movie = ({ movie }) => {
       console.log(response, "artist");
       setArtists(response.data.cast.slice(0, 5)); // Get the first 5 artists
     } catch (error) {
-      console.error("Error fetching artists: ", error);
+      toast.error("Error fetching artists", {
+        position: "top",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      //   console.error("Error fetching artists: ", error);
     }
   };
 

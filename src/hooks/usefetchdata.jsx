@@ -13,7 +13,7 @@ const fetchMovies = async (page) => {
       },
     });
 
-    console.log(response, "api data fetching");
+    // console.log(response, "api data fetching");
     return response.data.results;
   } catch (error) {
     console.error("Error fetching data: ", error);
