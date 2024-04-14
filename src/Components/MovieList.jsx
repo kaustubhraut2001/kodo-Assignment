@@ -10,8 +10,8 @@ const MovieList = () => {
   const loadMoreMovies = async () => {
     try {
       const newMovies = await fetchMovies(page + 1);
-    //   console.log(newMovies, "new movies");
-      if (newMovies.length > 0) {
+      //   console.log(newMovies, "new movies");
+      if (newMovies?.length > 0) {
         toast.success("Movies loaded successfully", {
           position: "top",
           autoClose: 3000,
@@ -26,7 +26,7 @@ const MovieList = () => {
       setMovies((prevMovies) => [...prevMovies, ...newMovies]);
       setPage((prevPage) => prevPage + 1);
     } catch (error) {
-    //   console.error("Error  ", error.message);
+      //   console.error("Error  ", error.message);
       toast.error("Error fetching data", {
         position: "top",
         isClosable: true,
@@ -42,8 +42,8 @@ const MovieList = () => {
   return (
     <div className="px-4 py-16">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {movies.map((movie) => (
-          <Movie key={movie.id} movie={movie} />
+        {movies?.map((movie) => (
+          <Movie key={movie?.id} movie={movie} />
         ))}
       </div>
       <div className="flex justify-center items-center">

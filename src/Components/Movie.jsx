@@ -17,27 +17,30 @@ const Movie = ({ movie }) => {
     const BASE_URL = "https://api.themoviedb.org/3";
     // Fetch trailer
     try {
-      const response = await axios.get(`${BASE_URL}/movie/${movie.id}/videos`, {
-        params: {
-          api_key: API_KEY,
-        },
-      });
-      setTrailer(response.data.results[0]?.key);
+      const response = await axios.get(
+        `${BASE_URL}/movie/${movie?.id}/videos`,
+        {
+          params: {
+            api_key: API_KEY,
+          },
+        }
+      );
+      setTrailer(response?.data?.results[0]?.key);
     } catch (error) {
-		toast.error("Error fetching trailer", {
-			position: "top",
-			autoClose: 3000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-		  });
+      toast.error("Error fetching trailer", {
+        position: "top",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
 
     // Fetch artists
     try {
       const response = await axios.get(
-        `${BASE_URL}/movie/${movie.id}/credits`,
+        `${BASE_URL}/movie/${movie?.id}/credits`,
         {
           params: {
             api_key: API_KEY,
@@ -45,7 +48,7 @@ const Movie = ({ movie }) => {
         }
       );
       console.log(response, "artist");
-      setArtists(response.data.cast.slice(0, 5)); // Get the first 5 artists
+      setArtists(response?.data?.cast?.slice(0, 5)); // Get the first 5 artists
     } catch (error) {
       toast.error("Error fetching artists", {
         position: "top",

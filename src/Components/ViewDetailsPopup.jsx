@@ -35,7 +35,6 @@ const ViewDetailsPopup = ({
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-75">
           <div className="bg-white p-4 rounded shadow-md w-3/4 h-3/4 overflow-y-auto">
             <div className="w-1/2 relative h-full float-left">
-
               <img
                 src={`https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`}
                 alt={selectedMovie?.title}
@@ -60,11 +59,11 @@ const ViewDetailsPopup = ({
 
               <h3 className="text-lg font-bold mb-2">Artists:</h3>
               <ul className="flex space-x-2 animate-pulse">
-                {artistArray.map((artist) => (
-                  <li key={artist.id} className="flex-none">
+                {artistArray?.map((artist) => (
+                  <li key={artist?.id} className="flex-none">
                     <img
-                      src={`https://image.tmdb.org/t/p/w500${artist.profile_path}`}
-                      alt={artist.name}
+                      src={`https://image.tmdb.org/t/p/w500${artist?.profile_path}`}
+                      alt={artist?.name}
                       className="w-10 h-10 rounded-full"
                     />
                   </li>
