@@ -48,12 +48,14 @@ const MovieList = () => {
           <Movie key={movie.id} movie={movie} />
         ))}
       </div>
-      <button
-        onClick={loadMoreMovies}
-        className="mt-10 px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        Load More
-      </button>
+      <div className="flex justify-center items-center">
+        <button
+          onClick={loadMoreMovies}
+          className="mt-10 px-4 py-2 bg-blue-500 text-white rounded "
+        >
+          Load More
+        </button>
+      </div>
     </div>
   );
 };
