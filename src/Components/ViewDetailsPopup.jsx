@@ -24,7 +24,7 @@ const ViewDetailsPopup = ({
   useEffect(() => {
     const intervalId = setInterval(() => {
       handleArtistArrayAnimation();
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(intervalId);
   }, [artistArray]);
